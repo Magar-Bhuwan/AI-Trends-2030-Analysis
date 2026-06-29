@@ -1,0 +1,8 @@
+#!/bin/sh
+'''exec' "/media/suko-magar/LocalDisk/ML with Python/Projects/AI Trends 2030/.venv/bin/python" "$0" "$@"
+' '''
+import sys
+from jupyter_core.migrate import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())
