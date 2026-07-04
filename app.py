@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -6,7 +7,9 @@ import plotly.express as px
 st.set_page_config(page_title="AI Job Trends Dashboard (2024-2030)", layout="wide")
 
 @st.cache_data
-def load_data(path="ai_job_trends_dataset(2024-230).csv"):
+def load_data():
+    candidates = ["ai_job_trends_dataset(2024-2030).csv", "ai_job_trends_dataset(2024-230).csv"]
+    path = next((c for c in candidates if os.path.exists(c)), candidates[0])
     return pd.read_csv(path)
 
 st.title("AI Job Trends Dashboard (2024-2030)")
