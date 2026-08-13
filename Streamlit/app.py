@@ -1,16 +1,21 @@
 import os
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import streamlit as st
 import plotly.express as px
 
-st.set_page_config(page_title="AI Job Trends Dashboard (2024-2030)", layout="wide")
+st.set_page_config(page_title="AI Job Trends Dashboard (2024-230)", layout="wide")
 
 @st.cache_data
 def load_data():
-    candidates = ["ai_job_trends_dataset(2024-2030).csv", "ai_job_trends_dataset(2024-230).csv"]
-    path = next((c for c in candidates if os.path.exists(c)), candidates[0])
-    return pd.read_csv(path)
+    data_path = Path(__file__).resolve().parent / "ai_job_trends_dataset(2024-230).csv"
+
+    if not data_path.exists():
+        st.error(f"CSV file not found: {data_path}")
+        st.stop()
+
+    return pd.read_csv(data_path)
 
 st.title("AI Job Trends Dashboard (2024-2030)")
 st.caption("Interactive exploration of AI impact, automation risk, and workforce projections.")
